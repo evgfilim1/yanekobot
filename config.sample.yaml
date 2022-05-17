@@ -1,0 +1,73 @@
+# Telegram bot configuration
+bot:
+  # Telegram bot token
+  token: "123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
+  # (Optional) Telegram local API URL, defaults to `"https://api.telegram.org"`
+  #api_url: "http://bot-api/"
+  # Admin chat IDs, everything is allowed from admin chats
+  admin_id:
+    - 123456789
+  # Allow editing picture category
+  allow_edit: no
+  # Allow moving pictures to "trash"
+  allow_delete: no
+  # Delete picture from disk after it's sent to Telegram
+  delete_after_send: no
+  # Delete picture from disk after moving to trash (implies `delete_from_db: yes`)
+  delete_from_disk: no
+  # Delete picture from database after moving to trash
+  delete_from_db: no
+# Redis database configuration
+redis:
+  # Redis host
+  host: redis
+  # Redis port
+  port: 6379
+  # (Optional) Redis password, defaults to `""`
+  #password: "qwerty123"
+  # (Optional) Redis database, defaults to `0`
+  #db: 1
+  # Key prefix for bot data
+  key_prefix: "nekobot"
+# Userbot parser configuration
+parser:
+  # Telegram User API app_id
+  app_id: "123456789"
+  # Telegram User API app_hash
+  app_hash: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  # Account configuration
+  # Key is account name
+  # Value is (optional) kwargs which will be passed to `pyrogram.Client` directly, defaults to `{}`
+  accounts:
+    user:
+# Storage configuration
+storage:
+  # URL where to get pictures, will be used as base for sending pictures
+  # If using local bot api server, file:/// protocol can be specified
+  url: "https://yanekobot.example.com/"
+  # Path where to save all data like pictures, trash, account sessions, etc.
+  base_path: "/data"
+# Category configuration
+categories:
+  # Key is a category name
+  neko:
+    # (Optional) Picture sources, defaults to `[]`
+    sources:
+      - # ID or username of the channel
+        id: -1001234567890
+        # (Optional) User which will be used to parse the channel. Must be present in `accounts`.
+        # Mandatory for private channels. Defaults to a random account from `accounts`.
+        user: user
+      - id: "@username"
+    # (Optional) Text aliases, an alternative way to trigger sending a picture, defaults to `[]`.
+    # Aliases are case-insensitive. They will work only when the bot is an admin in the chat.
+    aliases:
+      - neko
+    # (Optional) Is this category hidden in Telegram command menu? Defaults to `no`
+    hidden: no
+    # (Optional) Mark this category as not safe for work (nudity, erotic content, etc.)
+    # Defaults to `no`
+    nsfw: no
+    # (Optional) Captions for pictures, will be chosen randomly, defaults to `[]`
+    captions:
+      - Nya~!
